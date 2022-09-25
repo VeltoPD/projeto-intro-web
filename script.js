@@ -1,68 +1,80 @@
-// Transforme os itens da semana 1 em objetos
-Objeto1 = {
-    prato1: "baião de dois" ,
-    preco1: 29.90 ,
-    disponibilidade1: true , 
-    ingredientes1: ["feijão", " arroz", " queijo", " linguiça", " carne", " alho", " sal"]
+
+const pratosTipicos = [
+    {
+        prato: "baião de dois",
+        preco: 29.90,
+        disponibilidade: true,
+        ingredientes: ["feijão", " arroz", " queijo", " linguiça", " carne", " alho", " sal"]
+    },
+    {
+        prato: "moqueca",
+        preco: 38.50,
+        disponibilidade: false,
+        ingredientes: ["peixe", " camarão", " pimentão", " leite de coco", " coentro", " cebola", " sal"]
+    },
+    {
+        prato: "feijão tropeiro",
+        preco: 18.40,
+        disponibilidade: true,
+        ingredientes: ["feijão", " farofa", " linguiça", " ovo", " cheiro-verde", " pimenta", " alho", " sal"]
+    },
+    {
+        prato: "Vaca atolada",
+        preco: 25.50,
+        disponibilidade: true,
+        ingredientes: ["mandioca", " costela bovina", " cheiro-verde", " tomate", " colorau", " cebola", " alho", " sal"]
+    }
+]
+
+
+// Guarde todos os valores da propriedade array dos objetos em uma mesma string
+for (const prato of pratosTipicos) {
+    console.log(prato.ingredientes.join(', '))
 }
 
-Objeto2 = {
-    prato2 : "moqueca" , 
-    preco2 : 38.50 , 
-    disponibilidade2 : false , 
-    ingredientes2 : ["peixe", " camarão", " pimentão", " leite de coco", " coentro", " cebola", " sal"]
+
+// Exiba cada item da constante pratosTipicos a partir de uma iteração do laço
+for (const prato of pratosTipicos) {
+    for (propriedade in prato) {
+        console.log(`${propriedade}: ${prato[propriedade]}`)
+    }
+    console.log("--------------------------")
 }
 
-Objeto3 = {
-    prato3 : "feijão tropeiro" , 
-    preco3 : 18.40 , 
-    disponibilidade3 : true , 
-    ingredientes3 : ["feijão", " farofa", " linguiça", " ovo", " cheiro-verde", " pimenta", " alho", " sal"]
+
+// Crie uma função que receba como parâmetro um objeto, e devolva a string de pratosTipicos
+// com os dados do objeto
+function relatorio(pratosTipicos) {
+    let string_relatorio = '';
+    for (const prato of pratosTipicos) {
+        for (propriedade in prato) {
+            string_relatorio += `${propriedade}: ${prato[propriedade]} `;
+        } 
+    }
+    return string_relatorio;
 }
+console.log(relatorio(pratosTipicos));
 
-Objeto4 = {
-    prato4 : "Vaca atolada" ,
-    preco4 : 25.50 , 
-    disponibilidade4 : true , 
-    ingredientes4 : ["mandioca", " costela bovina", " cheiro-verde", " tomate", " colorau", " cebola", " alho", " sal"]
 
+//Crie uma função que recebe um array de objetos e uma string. Essa função deve retornar
+//um objeto, e o objeto retornado deve possuir apenas os itens que contenham o nome/título
+//igual a string passada como parâmetro. Caso não exista o item, exiba um alert indicando não encontrado.
+function busca_item(pratosTipicos, item_procurado) {
+    let encontrou_item = false;
+    for (const prato of pratosTipicos) {
+        for (propriedade in prato) {
+            if (prato['prato'] == item_procurado) {
+                encontrou_item = true;
+                return prato;
+            }
+        }
+    }
+    if (encontrou_item == false) {
+        alert('Item nao encontrado');
+        return 0;
+    }
 }
-
-// Crie um array para guardar os objetos
-const pratosTipicos = []
- 
-// Adicione os objetos ao array criado para guarda-los
-pratosTipicos.push(Objeto1,Objeto2,Objeto3,Objeto4)
-
-/*Verificar a característica booleana de cada objeto. 
-Se for true, adicionar ao array criado para receber objetos.
-Se for false, exibir um alert avisando que não foi adicionado*/
-
-if (Objeto1.disponibilidade1 == true) {
-    pratosTipicos.push(Objeto1)
-} else {
-    alert("baião de dois não está disponível")
-} // Lembrar do O maiúsculo do Objeto
- 
-if (Objeto2.disponibilidade2 == true) {
-    pratosTipicos.push(Objeto2)
-} else {
-    alert("moqueca não está disponível")
-} //JavaScript é case sensitive
-
-if (Objeto3.disponibilidade3 == true) {
-    pratosTipicos.push(Objeto3)
-} else {
-    alert("feijão tropeiro não está disponível")
-} //verificar letras maiúsculas e minúsculas
-
-if (Objeto4.disponibilidade4 == true) {
-    pratosTipicos.push(Objeto4)
-} else {
-    alert("vaca atolada não está disponível")
-} 
-
-console.log(pratosTipicos)
+console.log(busca_item(pratosTipicos, 'baião de dois'));
 
 
 
@@ -77,18 +89,7 @@ console.log(pratosTipicos)
 
 
 
-/*const mediaDosPratos = (preco1 + preco2 + preco3 + preco4) / 4
-console.log("Média dos pratos =", mediaDosPratos.toFixed(2))
 
-const todosDisponiveis = disponibilidade1 &&
-    disponibilidade2 && disponibilidade3 && disponibilidade4
-console.log("Todos os pratos disponíveis? ", todosDisponiveis)
-
-console.log(`${prato1.toUpperCase()} \nPreço: ${preco1} \nDisponibilidade: ${disponibilidade1} \nIngredientes: ${ingredientes1}`)
-console.log(`${prato2.toUpperCase()} \nPreço: ${preco2} \nDisponibilidade: ${disponibilidade2} \nIngredientes: ${ingredientes2}`)
-console.log(`${prato3.toUpperCase()} \nPreço: ${preco3} \nDisponibilidade: ${disponibilidade3} \nIngredientes: ${ingredientes3}`)
-console.log(`${prato4.toUpperCase()} \nPreço: ${preco4} \nDisponibilidade: ${disponibilidade4} \nIngredientes: ${ingredientes4}`)
-*/
 
 
 
